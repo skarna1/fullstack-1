@@ -3,30 +3,36 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 const Statistic = ({ name, value }) => (
-    <p>{name} {value}</p>
+    <tr>
+        <td>{name}</td><td>{value}</td>
+    </tr>
 )
 
 const Statistics = ({ hyva, neutraali, huono }) => {
     const summa = hyva + neutraali + huono
-    
+
     if (summa === 0) {
         return (
             <div>
-              <h3>Statistiikka</h3>
-              <p>Ei yhtään palautetta annettu</p>
+                <h3>Statistiikka</h3>
+                <p>Ei yhtään palautetta annettu</p>
             </div>
-          )
+        )
     }
     const keskiarvo = Math.round(100 * (hyva - huono) / summa) / 100
     const positiivisia = Math.round(100 * (100 * hyva) / summa) / 100
     return (
         <div>
             <h3>Statistiikka</h3>
-            <Statistic name="hyvä" value={hyva} />
-            <Statistic name="neutraali" value={neutraali}/>
-            <Statistic name="huono" value={huono}/>
-            <Statistic name="keskiarvo" value={keskiarvo}/>
-            <Statistic name="positiivisia" value={positiivisia + " %"} />
+            <table>
+                <tbody>
+                    <Statistic name="hyvä" value={hyva} />
+                    <Statistic name="neutraali" value={neutraali} />
+                    <Statistic name="huono" value={huono} />
+                    <Statistic name="keskiarvo" value={keskiarvo} />
+                    <Statistic name="positiivisia" value={positiivisia + " %"} />
+                </tbody>
+            </table>
         </div>
     )
 }
