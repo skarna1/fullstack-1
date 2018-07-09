@@ -10,6 +10,15 @@ const Statistics = ({ hyva, neutraali, huono }) => {
     const summa = hyva + neutraali + huono
     const keskiarvo = Math.round(100 * (hyva - huono) / summa) / 100
     const positiivisia = Math.round(100 * (100 * hyva) / summa) / 100
+    if (summa === 0) {
+        return (
+            <div>
+              <h3>Statistiikka</h3>
+              <Statistic name="Ei yhtään palautetta annettu" value="" />
+            </div>
+          )
+    }
+
     return (
         <div>
             <h3>Statistiikka</h3>
@@ -17,7 +26,7 @@ const Statistics = ({ hyva, neutraali, huono }) => {
             <Statistic name="neutraali" value={neutraali}/>
             <Statistic name="huono" value={huono}/>
             <Statistic name="keskiarvo" value={keskiarvo}/>
-            <Statistic name="positiivisia" value={positiivisia} />
+            <Statistic name="positiivisia" value={positiivisia + " %"} />
         </div>
     )
 }
