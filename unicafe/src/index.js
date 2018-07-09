@@ -4,12 +4,18 @@ import ReactDOM from 'react-dom'
 
 
 const Statistiikka = ({ hyva, neutraali, huono }) => {
+    const summa = hyva + neutraali + huono
+    const keskiarvo = Math.round(100 * (hyva-huono)/summa) / 100
+    const positiivisia = Math.round(100 * (100 * hyva)/summa) /100
     return (
+       
         <div>
             <h3>Statistiikka</h3>
             <p>hyvä {hyva}</p>
             <p>neutraali {neutraali}</p>
             <p>huono {huono}</p>
+            <p>keskiarvo {keskiarvo}</p>
+            <p>positiivisia {positiivisia} %</p>
         </div>
     )
 }
