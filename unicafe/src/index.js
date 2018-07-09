@@ -8,17 +8,17 @@ const Statistic = ({ name, value }) => (
 
 const Statistics = ({ hyva, neutraali, huono }) => {
     const summa = hyva + neutraali + huono
-    const keskiarvo = Math.round(100 * (hyva - huono) / summa) / 100
-    const positiivisia = Math.round(100 * (100 * hyva) / summa) / 100
+    
     if (summa === 0) {
         return (
             <div>
               <h3>Statistiikka</h3>
-              <Statistic name="Ei yhtään palautetta annettu" value="" />
+              <p>Ei yhtään palautetta annettu</p>
             </div>
           )
     }
-
+    const keskiarvo = Math.round(100 * (hyva - huono) / summa) / 100
+    const positiivisia = Math.round(100 * (100 * hyva) / summa) / 100
     return (
         <div>
             <h3>Statistiikka</h3>
@@ -47,32 +47,21 @@ class App extends React.Component {
         }
     }
 
-    klikHyva = () => {
+    klik = (name) => () => {
         this.setState({
-            hyva: this.state.hyva + 1
+            [name]: this.state[name] + 1
         })
     }
 
-    klikNeutraali = () => {
-        this.setState({
-            neutraali: this.state.neutraali + 1
-        })
-    }
-
-    klikHuono = () => {
-        this.setState({
-            huono: this.state.huono + 1
-        })
-    }
 
     render() {
         return (
             <div>
                 <div>
                     <h3>Anna palautetta</h3>
-                    <Button handleClick={this.klikHyva} text="hyvä" />
-                    <Button handleClick={this.klikNeutraali} text="neutraali" />
-                    <Button handleClick={this.klikHuono} text="huono" />
+                    <Button handleClick={this.klik('hyva')} text="hyvä" />
+                    <Button handleClick={this.klik('neutraali')} text="neutraali" />
+                    <Button handleClick={this.klik('huono')} text="huono" />
                     <Statistics hyva={this.state.hyva}
                         neutraali={this.state.neutraali}
                         huono={this.state.huono} />
